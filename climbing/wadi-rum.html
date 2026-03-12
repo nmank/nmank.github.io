@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yantibih Lak — New Route in Wadi Rum · Stoken the Fire</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0d0b; --surface: #161410; --card: #1c1a16;
+      --ink: #e8e2d8; --muted: #7a7268; --accent: #d4622a;
+      --accent2: #8fb3a0; --line: #2a2620;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Lora', serif; font-size: 17px; line-height: 1.8; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(14,13,11,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--ink); text-decoration: none; }
+    .nav-title span { color: var(--accent); }
+    .nav-back { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    .post-hero {
+      margin-top: 4rem; height: 55vh; position: relative; overflow: hidden;
+    }
+    .post-hero-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55) saturate(0.8); }
+    .post-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,13,11,1) 0%, rgba(14,13,11,0.3) 60%, transparent 100%);
+    }
+    .post-hero-text {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 3rem 4rem;
+      max-width: 860px;
+    }
+    .post-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+    .post-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); letter-spacing: 0.04em; line-height: 0.95; color: var(--ink); }
+
+    .post-body {
+      max-width: 720px; margin: 0 auto; padding: 4rem 2rem 6rem;
+    }
+    .post-body p { margin-bottom: 1.5rem; color: #d0cab8; }
+    .post-body p:first-child::first-letter {
+      font-family: 'Bebas Neue', sans-serif; font-size: 4rem;
+      float: left; line-height: 0.8; margin-right: 0.1em; margin-top: 0.1em;
+      color: var(--accent);
+    }
+    .post-img-wrap { margin: 2.5rem 0; }
+    .post-img-wrap img { width: 100%; max-height: 600px; object-fit: cover; display: block; }
+    .post-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 2.5rem 0; }
+    .post-img-grid img { width: 100%; height: 280px; object-fit: cover; display: block; }
+
+    .post-footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 0;
+      margin-top: 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .post-footer a { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); text-decoration: none; }
+    .post-footer a:hover { color: var(--ink); }
+
+    .external-note {
+      background: var(--card); border-left: 2px solid var(--accent2);
+      padding: 0.8rem 1rem; margin: 2rem 0;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted);
+    }
+    .external-note a { color: var(--accent2); }
+
+    footer { border-top: 1px solid var(--line); padding: 2rem 3rem; display: flex; justify-content: space-between; }
+    .footer-text { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; }
+    .footer-text a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .post-hero-text { padding: 2rem 1.5rem; }
+      .post-body { padding: 2rem 1.5rem 4rem; }
+      .post-img-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-title" href="../index.html">Stoken the <span>Fire</span></a>
+    <a class="nav-back" href="../index.html">← All Posts</a>
+  </nav>
+
+  <div class="post-hero">
+    <img class="post-hero-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyUU2yZnEtYAVeRgXV3sJuLA2mHJ_v9p5UbViAsqj60faVWKuOZLx9fxSwwq_ISqHW7D6F6XFwtGwd0VapjyIJR3LV9yOm7d75qDeeyQIBQ_fOdX50SOXJS9hydMBbd6bfjESJ-WuuEzMHvgg_58q2Ot5J9fHUFoIJ7P1jzQ4OsmwPZpOHz0-vbhGLdhdY/s1300/141712.jpg" alt="Wadi Rum" />
+    <div class="post-hero-overlay"></div>
+    <div class="post-hero-text">
+      <div class="post-date">March 6, 2026</div>
+      <h1 class="post-title">Yantibih Lak —<br>New Route in Wadi Rum</h1>
+    </div>
+  </div>
+
+  <article class="post-body">
+
+    <p>I was invited on another climbing trip, similar to the one in Morocco last year. But this time, we went to Wadi Rum. Originally, the plan was to try some harder multi-pitches. Then, Manolo contacted me and said him and Alvaro wanted to open a new route. I said yes, even though I have very little experience with first ascents. We did almost no research on potential lines, and previous ascents before traveling to Wadi Rum.</p>
+
+    <p>Manolo and I scouted some routes on Jebel Khazali with Atayek one morning before repeating a Christian Ravier route called Coleur Cafe as a team of three with Maria. We found couple of lines we liked to the left of Coleur Cafe.</p>
+
+    <p>The next day, Atayek drove Alvaro, Manolo, and I back to Jebel Khazali early in the morning of January 31st. Atayek recommended we looked at the wall next to Atayek Route (also by Christian Ravier). As soon as we saw it, we wanted to climb it. We selected a line connecting two cracks middway up the wall. Atayek said it hadn't been climbed. So, we asked him to leave us, we made plans to meet in the evening. Then we set off, with me leading the first pitch. A sparsely protected, easy slab lead its way to a small roof. After passing the roof, I found a closed, flaring, sandy seam in a slab. I climbed above my gear, risking a ledge fall, reminding myself that I know how to footjam slabby flares and handholds aren't needed to climb slabs. I found an anchor our left of perfect threads. These sandstone columns, perfectly spaced, 100% bomber.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiO6iHr4MCV2Fa625gbUTum84Wpxoy1xGiVhpKYilAqrf13WHWmbmicmR5Cw9VElwVdpI0CfmOV9rWFGcog-9F_pg8BdzGd4TXm2dJ3PU1c4RbhpAhOfSr3zkdzlV-P8kNubaByRMhO2BHX71Y80VzsqfrKm_MwXELnT2RvW6m4wfbHUBbmNYYimNwpNsCk/s4032/IMG_4175.jpeg" alt="On the wall" />
+    </div>
+
+    <p>Manolo lead a traversing pitch out left, placing many threads and doing some really cool jug pulling to a small corner/roof ending in a long walk left across a slab. This linked us up with an established route. Alvaro climbed a short pitch of this route following a nice corner to another thread belay.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhLGaEUSHXrL0fz5ljelVEAMAQn6c-48UxEr2RiC3jTfQGD9fKSnQuuM6dfQWI9BKqdyaEIGn9nCpT7jo9CjtjXxqk_KV1BknIdEBSZBEDgUux0xmcYwb08KqUEchSnaoFC82gmlLyqUF1ZBlFVvo80kxMVV1Ckc-ggbwP5SBBfWYJ8IO7_QOf-DKXeZzWf/s4032/IMG_9665.HEIC" alt="Climbing" />
+    </div>
+
+    <p>Then it was my turn. The plan was to follow a crack, but it looked closed off, and generally with bad rock. I proceeded to open a pitch where I protected in the crack with cams, then traversed right, climbing jugs and protecting with threads. After a number of meters weaving back and forth, looking to balance good gear with good holds, I made it to a final flare in the crack that looked like the only way up. I climbed the flare boulder problem, placed some gear above, then traversed to the right, building a belay off some threads. When the rest of the team arrived, we decided to drill our first bolted anchor. After that, we were way more inclined to use bolts.</p>
+
+    <div class="post-img-grid">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgM4Mxnh-410NDaZlxEUdbLrE29TicL1ORcVfHfRQuFVNCD3mHlEbNu0nekflW4mGiQxc9ZBhV84PIiPM3iu8g6CMT7yNK_IXgZ5QeJKqYWDwvFMCvMDsLbaXuzIWrfOX_qvj_d4Kw5UgSLALBpVDhTP05lA9YSc5WMtXbmjwcA0HsMgGgxdQRtk4R0lb2o/s4896/DSC01152.JPG" alt="Pitch" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZYv910GcniKJhnOPxzcdR3IJpAvQPC5T-xy5OaaJ5ehGtX0iF_MFH_SCq2t5Lq04iUG9-YyKW39KaJ2pxjJk8MCjBRtIiEZzICciSzjEtxJbNWM87SvcHFaiCiuX0tIolhRub2pGSxQ2QidoY2RuR3V5GTzGmLFJGG5_nTkJIzqQPQ0kxlllsE5xswtW3/s4032/IMG_4179.jpeg" alt="Belay" />
+    </div>
+
+    <p>Manolo lead the next pitch, traversing above the ledge and placing some funky cams. Then he headed straight up to a small pocketed bulge. He placed an umbrella-ed green totem. And, hanging off the totem, drilled a bolt to protect the crux boulder. He did the boulder, then wandered up moderate terrain to build a belay on a ledge by drilling two more bolts. He trundled a bunch of rock as he climbed.</p>
+
+    <div class="post-img-grid">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgaIFF_S5-PS6kD0KwpeyeoLZFZVD9Wn75M_sxTgwt0ChSTo4NvxJ516sBG6Z8zMdqlbOICUh9BpmwbWzG0pmbWBtEOiA6gNQzihImb9uG3gQ5jgw6IdpD0y1_9W0_84Q42lHyB8v7gQzW89X3vOQsZcFIX1HEXC-UOYqiGEUoPfbbV8bUnB-031no8TpTI/s4032/IMG_9671.HEIC" alt="Climbing" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgg95n5YC8slW-nVz9QHWpoW0skMjzgKrgFtsMI_9Tsg-ls_PUzfzX7_GguLNuiphjRz_ZDnKR8ubkXXAMZoQgCsMIGzhGQguHVEirVAO054YzYb3Z-kHXPYfs9ygE6JCamnJugCqwnQjMkPjArED-tyxucMhs41N4ZF4KnSaKuvduLBkC-k9tTITm-qRfk/s4896/DSC01155.JPG" alt="Rock face" />
+    </div>
+
+    <p>Then Alvaro made an impressive traverse off Manolo's belay to find the base of a crack we were aiming for. This time, the crack was relatively moderate with some wide bulges that we climbed around with some mantles. Alvaro tagged up the drill and bolted the next belay.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7JI48FMgOB90wKmyuiuZ4UA3wdyas9VWAYX8LshZ_K-MblheTqogiJreyUXpJ1HFCl5MFJgAbjbhnoVUPpMCDcJb1nXGeSzfm4zEyhJLbQse5gSdxNJib8ir_18-utnOn5cnmELJl24UjCskRqERrsQpOWWNaxMUkWFAiJ0qm_-8AndxVOXVlmCYPi0Ms/s4896/DSC01176.JPG" alt="The wall" />
+    </div>
+
+    <p>From this belay, we could have probably wandered around to the right, looking for moderate terrain. But I wanted to climb the seam above. I did a little free climbing, then started to aid when the seam only admitted my #2 micronut. Aiding off the micronut, I was able to top step to place a black totem, a few moves higher I built a mini anchor off of finger sized pieces and lowered. Alvaro and Manolo encouraged me to place a bolt to protect the boulder problem I had just aided through. I placed the bolt, then climbed up to the next ledge, unable to free-climb the boulder problem I had just bolted. I went up again, carefully, executing the boulder, and building a belay with two bolts after a short ledge traverse 8m above.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTTjBkI0y9bwK6-BpvIFrgU4WkDKG_Edf2qKkTZhwAuN91vpZHSPuPk2X_mZn_366mbtqIf6IvRccLTao_MgJSkjxaXZInIXmlz5W_Jou4SueolZmcz6ScC93DSW1uhwQRnL4Do_YQz7zdVOnBI-DZe_Jd2BSB2M042hElKdaFPDoy0P1P1nn0EGpdMxLW/s4896/DSC01163.JPG" alt="Sunset" />
+    </div>
+
+    <p>By now, the sun was setting and it was time to go down. We rapeled our route, Atayek picked us up and headed back to camp.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdFoUKoju3RYceQ7zQBjdpR08LATLKbRCrzbyzB6LQgzRrjGFPe4ZgYkR4mzCFiBxo6xsg3LfOYXSbjIoEiFMj60-aOE_BRHR7H6kXcW8Kn-AFE5QGPGUj7Tv_jf6wOgwjVVMiyrS5SYPgr-X_FaZAAVVbFiTs3W9D2m17k1yltRGI1pnEfZz9ts5MXIYj/s4032/IMG_9690.HEIC" alt="Sunset view" />
+    </div>
+
+    <p>The next day, we repeated the first 7 pitches, each of us freeing our pitches on lead. Me with pitches 1, 4, 7; Manolo on pitches 2, 5; and Alvaro on pitches 3, 6.</p>
+
+    <p>Manolo lead the next pitch, vision questing up the featured terrain, drilling one bolt, and arriving on a ledge with choss. He downclimbed to a slab and built a hanging belay off two bolts in better rock.</p>
+
+    <p>Alvaro took off on the next pitch, surmounting the chossy ledge, then drilling a bolt in the easiest part of the roof above the ledge. Then he traversed right to a corner that turned into a moderate chimney. The drill got stuck while hauling it up. I climbed up to free the drill and chimneyed up to Alvaro. Next time, don't haul in a chimney — flip the tag line out and haul on the outside. Yosemite 101 *facepalm.*</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh_Z2L_hk20icz-1FEekpuzcDW2noN-W-nQryOVET94_AQ6PU_i47siUdQwXNTmxkTy5EhxuROKAmpJp1VBil2nnic-SSzwo_V6XmG-uRJtHsOA3ZjLloxwMCdEcqxTOiD8xbJt2zT0B-dE2DVopkWtx8nSM6d4Dk-yyR0zxUCgviqxX39WDnwLwD7uG18a/s4032/IMG_9716.HEIC" alt="Chimney" />
+    </div>
+
+    <p>It was my turn to lead. While I climbed, Manolo flew the drone scouting the best line for my pitch. He located a ledge and suggested I traverse straight to the left to build a belay in an alcove with red rock. When I arrived, I couldn't find any gear. Sure, the climbing was easy, but there was no way to protect before the moderate traverse. I decided to drill a bolt. Then another. Then a two-bolt belay.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjb1LuakS8q-qn7jeaVvzYDY8KOTVdbtOPUdzfbWN9XZtQL26b83TAvkz2YNASnB9nyM6HM95ysW5sTGdqzih_mexN_gY0Qtx4CESbhUjoRW7Rw5Kgbja-BnJ3_wGk7jQBtayxj4J5CeI2EnFFp1ueFKhecbYFYvJxPMSgIFxPgcRKngYcllb3vlzR9lWSP/s8064/dji_fly_20260131_161530_382_1770206192878_photo.jpeg" alt="Drone view" />
+    </div>
+
+    <p>I regret drilling these bolts on the traverse. The next day, we checked the guidebook and found that this section of the route is shared with a Remi brother's route from the 80s. The only trace of their route were some threads for belays. We had drilled bolts in a clean route. A nightmare. I deeply regret it. I left a note in the guidebook asking anyone who repeats our route to remove the protection bolts I placed. All in all, we added 8 bolts in an otherwise clean route. This disgraces our style as first ascentionists. Next time I open a route, I will do my research beforehand.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHn3Kc0dYau1v_Vv-yZaykfQR06LWQc84vS0q3q2HkCi7fF3d1VFH0PwLlqUNMmaaxQB0iolXXE9Zz_upmZz2n76kqSOYsQttSMhNtr0Y-TrCW7rfu_moV_kB-e4J8DBfshD4BoPkuaemb_DLQ1uBeQy2fyHdioUHSe6oL7CI3YqKB5tMue5Sjcfa6hVDk/s4032/IMG_4220.jpeg" alt="The route" />
+    </div>
+
+    <p>OK, back to the story. Manolo lead the next pitch. He onsighted it, for the most impressive lead of the route, by far. Leading all on natural protection, placing no bolts, and no falls or hangs. Alvaro suggested this pitch was likely the crux of the route.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi964hhW2KP9B_zv01aYPTu_y5OHfxhQTrmD2xqqMwgjVfvOq1Dhtx6UzwsBalDEIg17A6mHtVlaDpteB4xuMB6086WCckqwONBH3PM_qoceSDsXUu6Xme8OEtUoHBtDBWtRxlPrdERA5UEHNm3xi_p7FATAUOiL9kJ17vEleHnp298mbWQVh3xWjS9RCng/s4032/IMG_9733.HEIC" alt="Summit view" />
+    </div>
+
+    <p>Alvaro grabbed the gear and took off on the last pitch. Drilling one bolt to protect a boulder problem above Manolo's anchor. He pulled on the bolt, and traversed left to a crack Manolo had seen with the drone. He climbed the crack and pulled onto the summit as darkness set in. I freed the moves past the bolt, and we walked onto the summit together.</p>
+
+    <div class="post-img-grid">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgeoIfpmWDIPB4KbIRqFhjJqm469X_O8caQAbseeoqZWkhUhcbGDlJCTHhjkjx5z_56D4rwRkDUHoGXU90f3hoyhNXd66xFtejVCrZbduh2pYHuDAvYLL-1VdTfdeYf62SZFuBX43_NvRgsuqvmvQf9H3CMcW5zSoB7W4AVTCnouYkaICH1ixBwc8NZUMs8/s4032/IMG_4224.jpeg" alt="Summit" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9hD_4Kt3yA0Njwefl1p1Ppr4YTGl6cu8b9iM9ZAQdwIm0SLwtC72At1_r-HDSGo3i4dG4GUma66fVJ3LeY6eq3MwLAIUPWOdaxOUNOx7d9TbloSYV2Mf1kVBOujq1I4runev2KJJDzRj8ezwM0pxV9aF6In2cc11ZyqzsV3QSj-g3BstqLXYByyX2Xr7l/s4032/IMG_4247.jpeg" alt="Rappel" />
+    </div>
+
+    <p>The rappels went smoothly. We found one rope coreshot. We wandered down the talus cone to a Bedoin camp next to the wall. We shared tea with some locals and watched them play cards. They asked us why we were trundling so much rock. We said that we wanted to clean our route.</p>
+
+    <div class="post-img-grid">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEho9meSA3NjxMDG3BZNQER4dsHPaAEXMvz7VoszjMxF6TGuHU7YVoN0pA212Cnb_06LdfWFeoGSaT3bC8Ehl9chWVZGZe6GHZc2E5Ohv7IfTSh0qQqFKdk6dd2HerYy3nMorEH7Sz2ghEorfDKOtTB6qx2KPmzxhNyDH2UySsCmRrykmHUfoTGiG4RLXAJg/s4032/IMG_9740.HEIC" alt="Camp" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi32zMhLdozWyY64bMVL38NZe9POQZmPXb3eEO5HPGgN6nVzLoOz-emMIHisFTH_Ihj95TDTRnUyNAr1ZbYSwJg1TI5xsEnuvtf5ADKcp4qMKfl_jp8MSDiN4FxrUtvBTI6HzaO9zWpMgCynsRfxDvWTvfKXgNlINJSaC4L4jqYh02OWce0U1tnJhxlDmqx/s4032/IMG_4272.jpeg" alt="Wadi Rum" />
+    </div>
+
+    <p>A while later, Atayek picked us up, and we drove quietly back to camp, tired, covered in the red sand of Wadi Rum.</p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizcCbJJcWmzEBG1ZBBwBZs5xx8rL5ERtbvrIpXeQ3qUDQTOxZ96PK4IgiGOb25yzt269nJUO8SSYhj4OMckkms8fMjG9dKA1iJ5_Gx7HaEQDIP4XrVvwBvHVUPkeoWDQNVYlg4APm2u76l6W59pcDWvxxA_dJ5XEPqiKR5mPzH0YQCo6-rqwYNpCHBTXIX/s1280/img-20260211-wa0045.jpg" alt="Wadi Rum sunset" />
+    </div>
+
+    <p><em>PS. This route has been published on <a href="https://www.desnivel.com/escalada-roca/nueva-via-en-el-wadi-rum-para-alvaro-vernich-nate-mankovich-y-manolo-lopez/" style="color: var(--accent2);" target="_blank">Desnivel</a> (written by Alvaro) and <a href="https://www.planetmountain.com/en/news/yantibih-lak-added-jebel-kazhali-jordan-wadi-rum/141712" style="color: var(--accent2);" target="_blank">Planet Mountain</a> (written by Manolo). Hopefully someone repeats it someday...</em></p>
+
+    <div class="post-img-wrap">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgvXuq8HCBU_MkG-I9XWWHWIQXtO9nHoyBD9SI5qQu5-Ma_mBcShTiC1LEnhrE_E47b9D23BZznEi31Sujksk_jv7HT1VndCJwlw4ohTEQ1M6cEn4RfSGgC4IeIHFHLl1GjxhBLBG7sp8mMPVfYgxfdcLjdMKKVNwmn-pUk44oiAd6a8IZWTss95NsfjLIJ/s4896/DSC01170.JPG" alt="Final view" />
+    </div>
+
+    <div class="post-footer">
+      <a href="../index.html">← Back to all posts</a>
+      <a href="bohemian-rhapsody.html">Next post →</a>
+    </div>
+  </article>
+
+  <footer>
+    <span class="footer-text">Stoken the Fire · Nathan Mankovich</span>
+    <span class="footer-text"><a href="https://nmank.github.io">nmank.github.io</a></span>
+  </footer>
+
+</body>
+</html>

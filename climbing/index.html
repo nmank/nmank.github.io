@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stoken the Fire</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0e0d0b;
+      --surface: #161410;
+      --card: #1c1a16;
+      --ink: #e8e2d8;
+      --muted: #7a7268;
+      --accent: #d4622a;
+      --accent2: #8fb3a0;
+      --line: #2a2620;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(14,13,11,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-title span { color: var(--accent); }
+    .nav-right {
+      display: flex; gap: 2rem; align-items: center;
+    }
+    .nav-right a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-right a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        160deg,
+        #0e0d0b 0%,
+        #1a1208 40%,
+        #2a1a0a 70%,
+        #0e0d0b 100%
+      );
+    }
+    .hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: italic;
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 4rem;
+      padding: 4rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* POSTS */
+    .posts-header {
+      display: flex; align-items: baseline; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .post-list { display: flex; flex-direction: column; gap: 0; }
+
+    .post-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+      padding: 1.8rem 0;
+    }
+    .post-card:first-child { border-top: 1px solid var(--line); }
+    .post-card:hover { background: var(--card); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; }
+
+    .post-card-img {
+      width: 180px; height: 120px;
+      object-fit: cover;
+      filter: saturate(0.7) brightness(0.85);
+      transition: filter 0.3s;
+      align-self: start;
+    }
+    .post-card:hover .post-card-img { filter: saturate(1) brightness(0.95); }
+
+    .post-card-no-img {
+      width: 180px; height: 120px;
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--line);
+    }
+    .post-card-no-img-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--line);
+      letter-spacing: 0.1em;
+    }
+
+    .post-card-body { padding-left: 1.5rem; }
+    .post-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      transition: color 0.2s;
+    }
+    .post-card:hover .post-title { color: var(--accent); }
+    .post-excerpt {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .post-read-more {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+
+    /* SIDEBAR */
+    .sidebar { padding-top: 0.5rem; }
+
+    .sidebar-block {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-block:last-child { border-bottom: none; }
+
+    .sidebar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .archive-year { margin-bottom: 1rem; }
+    .archive-year-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .archive-links { display: flex; flex-direction: column; gap: 0.3rem; padding-left: 0.8rem; }
+    .archive-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex; justify-content: space-between;
+    }
+    .archive-link:hover { color: var(--ink); }
+    .archive-count {
+      color: var(--line);
+      font-size: 0.6rem;
+    }
+
+    .about-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      text-decoration: none;
+    }
+    .about-link:hover { color: var(--ink); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .footer-text a { color: var(--accent2); text-decoration: none; }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .main-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 2rem; }
+      .post-card { grid-template-columns: 1fr; }
+      .post-card-img, .post-card-no-img { width: 100%; height: 160px; }
+      .post-card-body { padding-left: 0; padding-top: 1rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-title" href="index.html">Stoken the <span>Fire</span></a>
+    <div class="nav-right">
+      <a href="https://nmank.github.io">← Portfolio</a>
+      <a href="#archive">Archive</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-content">
+      <p class="hero-label">A climbing journal by Nathan Mankovich</p>
+      <h1 class="hero-title">Stoken<br>the <span>Fire</span></h1>
+      <p class="hero-desc">Adventures on rock — from Red River Gorge to Wadi Rum, Taghia to the Flatirons. Notes on climbing, fear, and what it means to go up.</p>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- POSTS -->
+    <main>
+      <div class="posts-header fade-in">
+        <span class="section-label">Latest /</span>
+        <h2>All Posts</h2>
+      </div>
+
+      <div class="post-list">
+
+        <a class="post-card fade-in" href="posts/wadi-rum.html">
+          <img class="post-card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyUU2yZnEtYAVeRgXV3sJuLA2mHJ_v9p5UbViAsqj60faVWKuOZLx9fxSwwq_ISqHW7D6F6XFwtGwd0VapjyIJR3LV9yOm7d75qDeeyQIBQ_fOdX50SOXJS9hydMBbd6bfjESJ-WuuEzMHvgg_58q2Ot5J9fHUFoIJ7P1jzQ4OsmwPZpOHz0-vbhGLdhdY/s320/141712.jpg" alt="Wadi Rum" />
+          <div class="post-card-body">
+            <div class="post-meta">March 6, 2026</div>
+            <div class="post-title">Yantibih Lak — New Route in Wadi Rum</div>
+            <div class="post-excerpt">I was invited on another climbing trip, similar to the one in Morocco last year. But this time, we went to Wadi Rum. Originally, the plan was to try some harder multi-pitches. Then, Manolo contacted me and said him and Alvaro wanted to open a new route...</div>
+            <span class="post-read-more">Read more →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="posts/bohemian-rhapsody.html">
+          <img class="post-card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQMbsQg0q1gGJF6VdLQ-rgP58muX5Lg8elb7e6_dHf_QKQKrGe19JfJys7jSebkKRlBavr69mkkiJoJob6aYO7GAYrPP2RHKj0cCjKGGT51x2Oj3VnkiNjcD4ylZjWsJx2siEsTUJdKnPrUJ-WbAFxabHT8_XGURs8c-Uhk628vsWqDN3a9v2SPUM2UuCV/w453-h640/WhatsApp%20Image%202025-11-17%20at%2020.20.27.jpeg" alt="Bohemian Rhapsody" />
+          <div class="post-card-body">
+            <div class="post-meta">February 18, 2026</div>
+            <div class="post-title">Bohemian Rhapsody</div>
+            <div class="post-excerpt">I didn't finish any of the pitches I started to open. My fear of the unknown paralyzed me. Wasting incredible amounts of energy. When I'm climbing I often feel two forces — something pulling me up the wall, a siren from the summit... and a weight pulling me down.</div>
+            <span class="post-read-more">Read more →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="posts/in-search-of-dirtbags.html">
+          <img class="post-card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtRj7nMttXH0FjaKEG4wFw_P2pUJW3TmUtPlvcRhxn8X2yYT6ml_wXEbS_FHmC7vvDT5P6Gxm-374WlUvqO5eY3VYvhuvdmlLHXzXdUzBrXGCJcKLbsHSAteNF6REbWTAIzbthei5q0oThqG4XjOMUYtXKerMVUhJPUEFqmrk7WqRKBir6e6NZaHl5Mgn-/s320/Andrew.jpg" alt="In Search of Dirtbags" />
+          <div class="post-card-body">
+            <div class="post-meta">October 7, 2025</div>
+            <div class="post-title">In Search of Dirtbags</div>
+            <div class="post-excerpt">A piece I wrote for a journalism course at Colorado College in 2015. It's pretty cool to look at something I wrote about climbing 10 years ago. It's another rainy day in Kentucky's Red River Gorge...</div>
+            <span class="post-read-more">Read more →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="posts/taghia-gorge.html">
+          <img class="post-card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgb2FtDCCxDOhPfhoexm9UzUAERbtHIS26z1IXGod1sVK6-gdUoIIxxxc2IUOP0CghlVrOW2UKSrfF4uedMY8ewbimHpO9K5g7aHZyLjWP3o2y86MnGPfLvb2Hhe53gjC-czuAgI8cB1PfIYF8DAvLmtKmI_tKZzjwSmx9EPOwIDHR_-l_qALiz-5CYDSHK/s320/f6f1cb6d-2a87-46d5-8895-ed83385016db.jpg" alt="Taghia Gorge" />
+          <div class="post-card-body">
+            <div class="post-meta">September 4, 2025</div>
+            <div class="post-title">Taghia Gorge, Easter 2025</div>
+            <div class="post-excerpt">My first time in Taghia Gorge with a group of 7 Spaniards. We each brought a checked bag, sharing cams, draws, and ropes. We took the short plane ride, then spent the better part of the afternoon in a taxi crossing from Marrakesh to the High Atlas mountains...</div>
+            <span class="post-read-more">Read more →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="https://stokenthefire.blogspot.com/2024/12/honest-sends-art-of-asterisk.html" target="_blank">
+          <div class="post-card-no-img"><span class="post-card-no-img-label">★</span></div>
+          <div class="post-card-body">
+            <div class="post-meta">December 6, 2024 · External link</div>
+            <div class="post-title">Honest Sends *the art of the asterisk*</div>
+            <div class="post-excerpt">We don't want to invalidate your sick send. We are just trying to make things more precise in the multipitch free-climbing community. An "honest send score of 100" is free climbing each pitch without falling and leading all significant pitches...</div>
+            <span class="post-read-more">Read on Blogger →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="https://stokenthefire.blogspot.com/2024/09/floating.html" target="_blank">
+          <img class="post-card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzcy7JlSJ5wTGqS6j9V2R5E1vFfbTAJij3CBEvd_5S8pwDJ2rgI2eER_C7HRy4GdMsncxPuXn9d8tPHC13syP1KADRWCmwgNUKnrIfK15-ToZWiPJHwc-OmJZz1WHOWq_ouuuCypOhxlOhPDjHwFcYUNCkXb4Yzy1MhIaAVbcH_MX_My9IKy7UqgtGLeOz/s320/PXL_20240609_191449834.jpg" alt="Floating" />
+          <div class="post-card-body">
+            <div class="post-meta">September 2, 2024 · External link</div>
+            <div class="post-title">Floating</div>
+            <div class="post-excerpt">I climbed outside 6 out of the last 9 days in Boulder. The elation I felt cresting the ridge on the first and looking out at the high peaks was breathtaking. Absolutely gorgeous. Being up high, gasping for air...</div>
+            <span class="post-read-more">Read on Blogger →</span>
+          </div>
+        </a>
+
+        <!-- Older posts linking back to Blogger -->
+        <a class="post-card fade-in" href="https://stokenthefire.blogspot.com/2024/04/new-routing-in-logrono.html" target="_blank">
+          <div class="post-card-no-img"><span class="post-card-no-img-label">↗</span></div>
+          <div class="post-card-body">
+            <div class="post-meta">April 2024 · External link</div>
+            <div class="post-title">New Routing in Logroño</div>
+            <div class="post-excerpt">Opening new routes on limestone in Logroño, Spain.</div>
+            <span class="post-read-more">Read on Blogger →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="https://stokenthefire.blogspot.com/2023/10/" target="_blank">
+          <div class="post-card-no-img"><span class="post-card-no-img-label">↗</span></div>
+          <div class="post-card-body">
+            <div class="post-meta">Oct 2023 · External link</div>
+            <div class="post-title">2023 Posts</div>
+            <div class="post-excerpt">Posts from 2023 including adventures in Spain and the USA.</div>
+            <span class="post-read-more">Browse on Blogger →</span>
+          </div>
+        </a>
+
+        <a class="post-card fade-in" href="https://stokenthefire.blogspot.com/2018/" target="_blank">
+          <div class="post-card-no-img"><span class="post-card-no-img-label">↗</span></div>
+          <div class="post-card-body">
+            <div class="post-meta">2017–2022 · External link</div>
+            <div class="post-title">Archive: Early Posts (2017–2022)</div>
+            <div class="post-excerpt">11 posts from 2018 covering Red River Gorge, Yosemite, and more. Plus posts from 2017, 2019, 2020, 2021, and 2022.</div>
+            <span class="post-read-more">Browse on Blogger →</span>
+          </div>
+        </a>
+
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="archive">
+      <div class="sidebar-block fade-in">
+        <div class="sidebar-title">About</div>
+        <p class="about-text">A climbing journal by Nathan Mankovich — mathematician, postdoc at the University of Valencia, and aspiring alpinist.</p>
+        <a class="about-link" href="https://nmank.github.io">← Back to portfolio</a>
+      </div>
+
+      <div class="sidebar-block fade-in">
+        <div class="sidebar-title">Archive</div>
+        <div class="archive-year">
+          <span class="archive-year-label">2026</span>
+          <div class="archive-links">
+            <a class="archive-link" href="posts/wadi-rum.html">March <span class="archive-count">1</span></a>
+            <a class="archive-link" href="posts/bohemian-rhapsody.html">February <span class="archive-count">1</span></a>
+          </div>
+        </div>
+        <div class="archive-year">
+          <span class="archive-year-label">2025</span>
+          <div class="archive-links">
+            <a class="archive-link" href="posts/in-search-of-dirtbags.html">October <span class="archive-count">1</span></a>
+            <a class="archive-link" href="posts/taghia-gorge.html">September <span class="archive-count">1</span></a>
+          </div>
+        </div>
+        <div class="archive-year">
+          <span class="archive-year-label">2024</span>
+          <div class="archive-links">
+            <a class="archive-link" href="https://stokenthefire.blogspot.com/2024/12/" target="_blank">December <span class="archive-count">1</span></a>
+            <a class="archive-link" href="https://stokenthefire.blogspot.com/2024/09/" target="_blank">September <span class="archive-count">1</span></a>
+            <a class="archive-link" href="https://stokenthefire.blogspot.com/2024/04/" target="_blank">April <span class="archive-count">2</span></a>
+          </div>
+        </div>
+        <div class="archive-year">
+          <span class="archive-year-label">2017–2023</span>
+          <div class="archive-links">
+            <a class="archive-link" href="https://stokenthefire.blogspot.com/" target="_blank">All older posts <span class="archive-count">17</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-block fade-in">
+        <div class="sidebar-title">Also on Blogger</div>
+        <p class="about-text" style="font-size:0.78rem;">The full archive including posts back to 2017 is still on Blogger.</p>
+        <a class="about-link" href="https://stokenthefire.blogspot.com" target="_blank">stokenthefire.blogspot.com →</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <span class="footer-text">Stoken the Fire · Nathan Mankovich</span>
+    <span class="footer-text"><a href="https://nmank.github.io">nmank.github.io</a></span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
